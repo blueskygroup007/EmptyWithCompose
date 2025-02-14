@@ -1,6 +1,7 @@
 package com.bluesky.emptywithcompose
 
 import android.content.res.Configuration
+import android.os.BaseBundle
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,18 +9,25 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.BasicAlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,13 +37,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import com.bluesky.emptywithcompose.ui.MsgData
 import com.bluesky.emptywithcompose.ui.theme.EmptyWithComposeTheme
 
@@ -46,7 +57,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             EmptyWithComposeTheme {
                 //MessageCard(Message("Jetpack compose", "Let we learn it!"))
-                Conversation(MsgData.messages)
+                //Conversation(MsgData.messages)
+                OpenDialogButton()
             }
         }
     }
@@ -61,18 +73,114 @@ fun OpenDialog() {
                 openDialog.value = false
             },
             title = {
-                Text(text = "开启位置服务", fontWeight = FontWeight.Bold,style = MaterialTheme.typography.titleLarge)
+                Text(
+                    text = "开启位置服务",
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.titleLarge
+                )
             },
-            text = { Text(text = "", fontSize = 16.sp)},
+            text = {
+                Text(
+                    text = "这将意味着，我们会给您提供精准的位置服务，并且您将接受关于您订阅的位置信息",
+                    fontSize = 16.sp
+                )
+            },
             confirmButton = {
-                TextButton(onClick ={openDialog.value = false}) {
-                    Text(text = "确认", fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.titleMedium)
+                TextButton(onClick = { openDialog.value = false }) {
+                    Text(
+                        text = "确认", fontWeight = FontWeight.Bold,
+                        style = MaterialTheme.typography.titleMedium
+                    )
                 }
             },
-            dismissButton = {}
+            dismissButton = {
+                TextButton(onClick = { openDialog.value = false }) {
+                    Text(
+                        "取消",
+                        fontWeight = FontWeight.W700,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                }
+            }
 
         )
+    }
+}
+
+
+@Composable
+fun OpenDialogButton() {
+    val openDialog = remember { mutableStateOf(true) }
+    if (openDialog.value) {
+        androidx.compose.material.AlertDialog(
+
+            onDismissRequest = {
+                openDialog.value = false
+            },
+            title = {
+                Text(
+                    text = "开启位置服务",
+                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.titleLarge
+                )
+            },
+            text = {
+                Text(
+                    text = "这将意味着，我们会给您提供精准的位置服务，并且您将接受关于您订阅的位置信息",
+                    fontSize = 16.sp
+                )
+            },
+            buttons = {
+                Row(
+                    modifier = Modifier.padding(all = 8.dp),
+                    horizontalArrangement = Arrangement.Center
+
+                ) {
+
+                    Button(
+                        modifier = Modifier.fillMaxWidth(),
+                        onClick = { openDialog.value = false }) {
+                        Text("必须接受!")
+                    }
+                }
+            }
+        )
+    }
+}
+
+@Composable
+fun BaseDialog() {
+    var flag by remember { mutableStateOf(false) }
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+
+        Button(onClick = { flag = true }) { Text("弹窗") }
+    }
+    if (flag) {
+        Dialog(onDismissRequest = { flag = false }) {
+            Box(
+                modifier = Modifier
+                    .size(300.dp)
+                    .background(Color.White),
+                contentAlignment = Alignment.Center
+            ) {
+                Column {
+                    LinearProgressIndicator()
+                    Text("加载中 ing...")
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun PreviewOpenDialog() {
+    EmptyWithComposeTheme {
+        //OpenDialog()
+        OpenDialogButton()
     }
 }
 
