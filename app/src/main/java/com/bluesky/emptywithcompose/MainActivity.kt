@@ -44,17 +44,22 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.bluesky.emptywithcompose.ui.MsgData
 import com.bluesky.emptywithcompose.ui.theme.EmptyWithComposeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        //enableEdgeToEdge()//这个方法的作用是使应用的界面能够显示在屏幕的边缘到边缘，
+        // 即使是在系统栏（如状态栏和导航栏）的背后。这样可以让应用的内容完全利用设备的显示区域，
+        // 提供更为流畅和沉浸式的用户体验
         setContent {
             EmptyWithComposeTheme {
                 //MessageCard(Message("Jetpack compose", "Let we learn it!"))
                 //Conversation(MsgData.messages)
-                OpenDialogButton()
+                //OpenDialogButton()
+                //ScaffoldDemo()
+                SurfaceDemo()
             }
         }
     }
