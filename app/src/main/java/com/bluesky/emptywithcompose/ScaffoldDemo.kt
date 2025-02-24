@@ -77,23 +77,19 @@ fun ScaffoldDemo() {
         },
         bottomBar = {
             BottomNavigation {
-                BottomNavigation {
-                    items.forEachIndexed { index, item ->
-                        BottomNavigationItem(
-                            icon = {
-                                when (index) {
-                                    0 -> Icon(Icons.Filled.Home, contentDescription = null)
-                                    1 -> Icon(Icons.Filled.Favorite, contentDescription = null)
-                                    else -> Icon(Icons.Filled.Settings, contentDescription = null)
-                                }
-                            },
-                            label = { Text(item) },
-                            selected = selectedItem == index,
-                            onClick = { selectedItem = index }
-                        )
-                    }
-
-
+                items.forEachIndexed { index, item ->
+                    BottomNavigationItem(
+                        icon = {
+                            when (index) {
+                                0 -> Icon(Icons.Filled.Home, contentDescription = null)
+                                1 -> Icon(Icons.Filled.Favorite, contentDescription = null)
+                                else -> Icon(Icons.Filled.Settings, contentDescription = null)
+                            }
+                        },
+                        label = { Text(item) },
+                        selected = selectedItem == index,
+                        onClick = { selectedItem = index }
+                    )
                 }
             }
         },

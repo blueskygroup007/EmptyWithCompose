@@ -59,7 +59,8 @@ class MainActivity : ComponentActivity() {
                 //Conversation(MsgData.messages)
                 //OpenDialogButton()
                 //ScaffoldDemo()
-                SurfaceDemo()
+                //SurfaceDemo()
+                MBSLDemo2()
             }
         }
     }
