@@ -1,5 +1,5 @@
 [versions]
-agp = "8.3.0" #修改为最新版本
+agp = "8.6.0" #修改为最新版本
 kotlin = "1.9.22"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -7,7 +7,7 @@ junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.0"
-composeBom = "2024.04.00"
+composeBom = "2025.02.00"
 androidx-compose-material = "1.7.7" # 使用androidx.compose.material的最新版本
 
 [libraries]
@@ -27,11 +27,12 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android" }
 kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
-
+androidx-compose-animation = { group = "androidx.compose.animation", name = "animation" }
 androidx-compose-material = { module = "androidx.compose.material:material", version.ref = "androidx-compose-material" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
 
 [bundles]
 kotlinx-coroutines = ["kotlinx-coroutines-android"]

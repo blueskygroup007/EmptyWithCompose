@@ -90,5 +90,6 @@ dependencies {
     implementation(platform(libs.kotlin.bom))
 
     implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.animation)
 
 }
