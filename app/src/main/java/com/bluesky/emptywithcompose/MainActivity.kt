@@ -60,7 +60,10 @@ class MainActivity : ComponentActivity() {
                 //OpenDialogButton()
                 //ScaffoldDemo()
                 //SurfaceDemo()
-                MBSLDemo2()
+                //MBSLDemo2()
+                //DraggableDemo()
+                //SwipeableDemo()
+                TransformerDemo()
             }
         }
     }
