@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">EmptyWithCompose</string>
+    <string name="title_activity_basics_codelab">BasicsCodelabActivity</string>
 </resources>
