@@ -1,10 +1,10 @@
 package com.bluesky.emptywithcompose
 
+import SmartSwipeRefresh
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
@@ -16,7 +16,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,6 +26,9 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -31,6 +36,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -46,6 +52,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.bluesky.emptywithcompose.ui.MsgData
 import com.bluesky.emptywithcompose.ui.theme.EmptyWithComposeTheme
+import kotlinx.coroutines.delay
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +70,60 @@ class MainActivity : ComponentActivity() {
                 //MBSLDemo2()
                 //DraggableDemo()
                 //SwipeableDemo()
-                TransformerDemo()
+                //TransformerDemo()
+                Surface {
+                    SmartSwipeRefreshDemo()
+                }
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun SmartSwipeRefreshDemo() {
+    val sentences = remember {
+        mutableStateListOf(
+            "铁轨总得创死一个人，要不就创死你吧",
+            "嘉然，我真的好喜欢你啊，为了你我要听猫中毒",
+            "你们平时都不看的吗",
+            "我真的怀疑有些人闲的程度",
+        )
+    }
+    Box(modifier = Modifier.fillMaxSize()) {
+        SmartSwipeRefresh(
+            onRefresh = {
+                delay(2000)
+                if (sentences.size == 4) {
+                    sentences.add(0, "骂谁罕见，骂谁罕见")
+                    sentences.add(0, "真的绝绝子，好喝到翘jiojio")
+                    sentences.add(0, "乃琳你带我走吧")
+                }
+            },
+            loadingIndicator = {
+                Box(modifier = Modifier.padding(10.dp)) {
+                    CircularProgressIndicator(Modifier.size(20.dp))
+                }
+            }
+        ) {
+            LazyColumn(Modifier.fillMaxSize()) {
+                items(sentences.size) {
+                    val currentSentence = sentences[it]
+                    Card(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(200.dp)
+                            .padding(16.dp),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+                    ) {
+                        Box(
+                            Modifier
+                                .fillMaxSize()
+                                .padding(16.dp), contentAlignment = Alignment.Center) {
+                            Text(text = currentSentence, fontSize = 24.sp)
+                        }
+                    }
+                }
             }
         }
     }
