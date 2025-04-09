@@ -1,6 +1,4 @@
-package com.bluesky.emptywithcompose.ui
-
-import com.bluesky.emptywithcompose.Message
+package com.bluesky.emptywithcompose
 
 /**
  *
