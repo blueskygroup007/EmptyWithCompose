@@ -5,10 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,24 +31,39 @@ class CodelabsActivity : ComponentActivity() {
 }
 
 @Composable
-fun MyApp(modifier: Modifier = Modifier) {
-    Surface(modifier = modifier, color = MaterialTheme.colorScheme.background) {
-        Greeting("Android")
+fun MyApp(modifier: Modifier = Modifier, names: List<String> = listOf("World", "Compose")) {
+    /*    Surface(modifier = modifier, color = MaterialTheme.colorScheme.background) {
+            Greeting("Android")
+        }*/
+    Column(modifier.padding(vertical = 4.dp)) {
+        for (name in names) {
+            Greeting(name)
+        }
     }
+
 }
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Surface(color = MaterialTheme.colorScheme.primary) {
-        Column(modifier) {
+    Surface(
+        color = MaterialTheme.colorScheme.primary,
+        modifier = modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+    ) {
+        Row(modifier = modifier.padding(24.dp)) {
 
-            Text(text = "Hello")
-            Text(text = name)
+            Column(modifier = Modifier.weight(1f)) {
+
+                Text(text = "Hello")
+                Text(text = name)
+            }
+            ElevatedButton(onClick = {}) {
+                Text(text = "Show more")
+            }
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, widthDp = 320/*todo 模拟小屏幕手机的常见宽度 320dp*/)
 @Composable
 fun GreetingPreview() {
     EmptyWithComposeTheme {
