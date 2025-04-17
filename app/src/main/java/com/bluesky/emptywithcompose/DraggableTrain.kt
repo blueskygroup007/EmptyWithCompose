@@ -6,7 +6,6 @@ import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
 import androidx.compose.foundation.gestures.rememberTransformableState
 import androidx.compose.foundation.gestures.transformable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -77,6 +76,8 @@ fun DraggableDemo() {
 
 enum class Status { CLOSE, OPEN }
 
+
+/*这个函数里面用到了material2的api*/
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 @Preview

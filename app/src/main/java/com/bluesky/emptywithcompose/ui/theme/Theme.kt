@@ -9,6 +9,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 
@@ -29,16 +30,29 @@ import androidx.compose.ui.platform.LocalContext
         在 "Export" 选项卡中，选择 "Android (Compose)"，然后点击 "Download" 下载生成的代码。
         将下载的代码复制粘贴到你的项目中
 * */
-private val DarkColorScheme = darkColorScheme(
+/*private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
     secondary = PurpleGrey80,
     tertiary = Pink80
+)*/
+
+private val DarkColorScheme = darkColorScheme(
+    surface = Blue,
+    onSurface = Navy,
+    primary = Navy,
+    onPrimary = Chartreuse
 )
 
+
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
+    //primary = Purple40,
     secondary = PurpleGrey40,
-    tertiary = Pink40
+    tertiary = Pink40,
+
+        surface = Blue,
+        onSurface = Color.White,
+        primary = LightBlue,
+        onPrimary = Navy
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),

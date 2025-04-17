@@ -118,7 +118,8 @@ fun SmartSwipeRefreshDemo() {
                         Box(
                             Modifier
                                 .fillMaxSize()
-                                .padding(16.dp), contentAlignment = Alignment.Center) {
+                                .padding(16.dp), contentAlignment = Alignment.Center
+                        ) {
                             Text(text = currentSentence, fontSize = 24.sp)
                         }
                     }
@@ -171,12 +172,13 @@ fun OpenDialog() {
     }
 }
 
+/*涉及material2的*/
 
-@Composable
+/*@Composable
 fun OpenDialogButton() {
     val openDialog = remember { mutableStateOf(true) }
     if (openDialog.value) {
-        androidx.compose.material.AlertDialog(
+        AlertDialog(
 
             onDismissRequest = {
                 openDialog.value = false
@@ -210,7 +212,7 @@ fun OpenDialogButton() {
             }
         )
     }
-}
+}*/
 
 @Composable
 fun BaseDialog() {
@@ -239,14 +241,6 @@ fun BaseDialog() {
     }
 }
 
-@Preview
-@Composable
-fun PreviewOpenDialog() {
-    EmptyWithComposeTheme {
-        //OpenDialog()
-        OpenDialogButton()
-    }
-}
 
 data class Message(val author: String, val body: String)
 
